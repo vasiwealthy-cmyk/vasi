@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VASI 琺息蘊美空間 — 價目表</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Noto+Serif+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f7f0e8;
+    --blush: #e8c9b8;
+    --rose: #c8947a;
+    --deep: #6b4c3b;
+    --warm: #9e6b55;
+    --muted: #b49080;
+    --ink: #3a2820;
+    --light-text: #9e8070;
+    --card-bg: rgba(255,255,255,0.55);
+    --divider: rgba(168,120,90,0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Serif TC', serif;
+    background-color: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Background decoration */
+  body::before {
+    content: '';
+    position: fixed;
+    top: -20%;
+    right: -15%;
+    width: 55vw;
+    height: 55vw;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,201,184,0.35) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    bottom: -15%;
+    left: -10%;
+    width: 45vw;
+    height: 45vw;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,148,122,0.2) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Header */
+  header {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 56px 24px 40px;
+  }
+
+  .brand-en {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 7vw, 5rem);
+    font-weight: 300;
+    letter-spacing: 0.18em;
+    color: var(--deep);
+    line-height: 1;
+  }
+
+  .brand-zh {
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    font-weight: 300;
+    letter-spacing: 0.35em;
+    color: var(--warm);
+    margin-top: 10px;
+  }
+
+  .tagline {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    margin-top: 20px;
+    font-size: clamp(0.72rem, 2vw, 0.85rem);
+    letter-spacing: 0.3em;
+    color: var(--muted);
+  }
+
+  .tagline-sep {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1em;
+    color: var(--blush);
+  }
+
+  .header-line {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--rose), transparent);
+    margin: 24px auto 0;
+  }
+
+  /* Tabs */
+  .tabs-wrapper {
+    position: relative;
+    z-index: 10;
+    padding: 0 20px 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .tabs-wrapper::-webkit-scrollbar { display: none; }
+
+  .tabs {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    min-width: max-content;
+    margin: 0 auto;
+    padding: 0 4px 16px;
+  }
+
+  .tab-btn {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    padding: 9px 20px;
+    border: 1px solid var(--divider);
+    background: var(--card-bg);
+    color: var(--muted);
+    border-radius: 40px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    backdrop-filter: blur(8px);
+  }
+
+  .tab-btn:hover {
+    border-color: var(--rose);
+    color: var(--deep);
+  }
+
+  .tab-btn.active {
+    background: var(--deep);
+    border-color: var(--deep);
+    color: var(--cream);
+    box-shadow: 0 4px 20px rgba(107,76,59,0.3);
+  }
+
+  /* Content area */
+  .content-area {
+    position: relative;
+    z-index: 10;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 10px 20px 60px;
+  }
+
+  .tab-panel { display: none; }
+  .tab-panel.active {
+    display: block;
+    animation: fadeUp 0.4s ease;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Section header */
+  .section-header {
+    text-align: center;
+    margin-bottom: 28px;
+    padding-top: 8px;
+  }
+
+  .section-title-en {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--rose);
+    letter-spacing: 0.05em;
+  }
+
+  .section-title-zh {
+    font-size: clamp(1rem, 3vw, 1.25rem);
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    color: var(--deep);
+    margin-top: 4px;
+  }
+
+  .section-desc {
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    color: var(--light-text);
+    margin-top: 8px;
+    font-weight: 300;
+  }
+
+  .section-ornament {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 14px;
+  }
+
+  .ornament-line {
+    width: 50px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--blush));
+  }
+  .ornament-line.rev {
+    background: linear-gradient(90deg, var(--blush), transparent);
+  }
+
+  .ornament-diamond {
+    width: 5px;
+    height: 5px;
+    background: var(--rose);
+    transform: rotate(45deg);
+  }
+
+  /* Service cards */
+  .service-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .service-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(232,201,184,0.5);
+    border-radius: 14px;
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 12px rgba(107,76,59,0.06);
+  }
+
+  .service-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(107,76,59,0.12);
+    border-color: rgba(200,148,122,0.4);
+  }
+
+  .service-info { flex: 1; }
+
+  .service-name {
+    font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--deep);
+    line-height: 1.4;
+  }
+
+  .service-sub {
+    font-size: 0.72rem;
+    color: var(--light-text);
+    letter-spacing: 0.08em;
+    margin-top: 3px;
+  }
+
+  .price-block {
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .price-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .price-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 4vw, 1.9rem);
+    font-weight: 600;
+    color: var(--rose);
+    line-height: 1;
+  }
+
+  .price-currency {
+    font-size: 0.7em;
+    vertical-align: super;
+    font-weight: 300;
+  }
+
+  /* All services view */
+  .subsection {
+    margin-bottom: 32px;
+  }
+
+  .subsection-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    color: var(--muted);
+    text-align: center;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .subsection-label::before,
+  .subsection-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--divider);
+  }
+
+  /* Footer */
+  footer {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 0 20px 36px;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    color: var(--light-text);
+  }
+
+  footer .footer-line {
+    width: 60px;
+    height: 1px;
+    background: var(--divider);
+    margin: 0 auto 16px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand-en">VASI</div>
+  <div class="brand-zh">琺息蘊美空間</div>
+  <div class="tagline">
+    <span>科技</span><span class="tagline-sep">｜</span>
+    <span>抗衰</span><span class="tagline-sep">｜</span>
+    <span>美顏</span><span class="tagline-sep">｜</span>
+    <span>舒壓</span>
+  </div>
+  <div class="header-line"></div>
+</header>
+
+<div class="tabs-wrapper">
+  <div class="tabs" id="tabBar">
+    <button class="tab-btn active" data-tab="all">全部項目</button>
+    <button class="tab-btn" data-tab="tech">科技</button>
+    <button class="tab-btn" data-tab="fine">精緻</button>
+    <button class="tab-btn" data-tab="light">輕奢</button>
+    <button class="tab-btn" data-tab="heal">療癒</button>
+    <button class="tab-btn" data-tab="premium">極致</button>
+    <button class="tab-btn" data-tab="gcs">GCS無創超導</button>
+    <button class="tab-btn" data-tab="honor">尊榮</button>
+  </div>
+</div>
+
+<div class="content-area">
+
+  <!-- ALL -->
+  <div class="tab-panel active" id="panel-all">
+    <div class="subsection">
+      <div class="subsection-label">科技</div>
+      <div class="service-list">
+        <div class="service-card">
+          <div class="service-info"><div class="service-name">膠原靚白艙</div></div>
+          <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>1,380</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-info"><div class="service-name">全效光波賦美艙</div></div>
+          <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>1,380</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-label">精緻</div>
+      <div class="service-list">
+        <div class="service-card">
+          <div class="service-info"><div class="service-name">E油舒顏</div></div>
+          <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>1,380</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-info"><div class="service-name">明眸舒壓</div></div>
+          <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>1,380</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-info"><div class="service-name">靚白透膚</div></div>
+          <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>1,380</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-label">輕奢</div>
+      <div class="service-list">
+        <div class="service-card">
+          <div class="service-info"><div class="service-name">深層毛孔淨化</div></div>
+          <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>1,980</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-info"><div class="service-name">晶潤舒緩安肌</div></div>
+          <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>1,980</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-info"><div class="service-name">雙極緊緻拉提</div></div>
+          <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>1,980</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-info"><div class="service-name">V顏緊緻撥筋</div></div>
+          <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>1,980</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-label">療癒</div>
+      <div class="service-list">
+        <div class="service-card">
+          <div class="service-info"><div class="service-name">悠然釋壓美體</div></div>
+          <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>1,980</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-info"><div class="service-name">深層極致舒壓</div></div>
+          <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>2,980</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-info"><div class="service-name">加購頭部／胸部／腹部</div><div class="service-sub">30min</div></div>
+          <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>980</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-label">極致</div>
+      <div class="service-list">
+        <div class="service-card">
+          <div class="service-info"><div class="service-name">晶透無創水光</div></div>
+          <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>2,980</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-info"><div class="service-name">微晶極致超導</div></div>
+          <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>2,980</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-info"><div class="service-name">清新抗痘靚顏</div></div>
+          <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>2,980</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-info"><div class="service-name">溫艾亮膚舒顏</div></div>
+          <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>2,980</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-info"><div class="service-name">顧部輕盈舒緩</div></div>
+          <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>2,980</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-info"><div class="service-name">靚亮美背護理</div></div>
+          <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>2,980</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-label">GCS無創超導</div>
+      <div class="service-list">
+        <div class="service-card">
+          <div class="service-info"><div class="service-name">淨靚白</div></div>
+          <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>4,980</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-info"><div class="service-name">淨靚緊</div></div>
+          <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>4,980</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-info"><div class="service-name">淨靚減</div></div>
+          <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>4,980</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-info"><div class="service-name">淨靚童顏</div></div>
+          <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>4,980</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-label">尊榮</div>
+      <div class="service-list">
+        <div class="service-card">
+          <div class="service-info"><div class="service-name">精緻泌活煥顏</div></div>
+          <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>9,880</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-info"><div class="service-name">外泌胜肽蘊髮</div></div>
+          <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>8,800</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TECH -->
+  <div class="tab-panel" id="panel-tech">
+    <div class="section-header">
+      <div class="section-title-en">Technology</div>
+      <div class="section-title-zh">科技療程</div>
+      <div class="section-desc">先進科技，煥亮肌膚新生</div>
+      <div class="section-ornament"><div class="ornament-line"></div><div class="ornament-diamond"></div><div class="ornament-line rev"></div></div>
+    </div>
+    <div class="service-list">
+      <div class="service-card">
+        <div class="service-info"><div class="service-name">膠原靚白艙</div></div>
+        <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>1,380</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-info"><div class="service-name">全效光波賦美艙</div></div>
+        <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>1,380</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINE -->
+  <div class="tab-panel" id="panel-fine">
+    <div class="section-header">
+      <div class="section-title-en">Refined</div>
+      <div class="section-title-zh">精緻護膚</div>
+      <div class="section-desc">細緻呵護，還原肌膚本色</div>
+      <div class="section-ornament"><div class="ornament-line"></div><div class="ornament-diamond"></div><div class="ornament-line rev"></div></div>
+    </div>
+    <div class="service-list">
+      <div class="service-card">
+        <div class="service-info"><div class="service-name">E油舒顏</div></div>
+        <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>1,380</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-info"><div class="service-name">明眸舒壓</div></div>
+        <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>1,380</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-info"><div class="service-name">靚白透膚</div></div>
+        <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>1,380</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIGHT LUXURY -->
+  <div class="tab-panel" id="panel-light">
+    <div class="section-header">
+      <div class="section-title-en">Light Luxury</div>
+      <div class="section-title-zh">輕奢美顏</div>
+      <div class="section-desc">輕奢體驗，深層煥膚</div>
+      <div class="section-ornament"><div class="ornament-line"></div><div class="ornament-diamond"></div><div class="ornament-line rev"></div></div>
+    </div>
+    <div class="service-list">
+      <div class="service-card">
+        <div class="service-info"><div class="service-name">深層毛孔淨化</div></div>
+        <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>1,980</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-info"><div class="service-name">晶潤舒緩安肌</div></div>
+        <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>1,980</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-info"><div class="service-name">雙極緊緻拉提</div></div>
+        <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>1,980</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-info"><div class="service-name">V顏緊緻撥筋</div></div>
+        <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>1,980</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEAL -->
+  <div class="tab-panel" id="panel-heal">
+    <div class="section-header">
+      <div class="section-title-en">Healing</div>
+      <div class="section-title-zh">療癒舒壓</div>
+      <div class="section-desc">身心療癒，深度放鬆</div>
+      <div class="section-ornament"><div class="ornament-line"></div><div class="ornament-diamond"></div><div class="ornament-line rev"></div></div>
+    </div>
+    <div class="service-list">
+      <div class="service-card">
+        <div class="service-info"><div class="service-name">悠然釋壓美體</div></div>
+        <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>1,980</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-info"><div class="service-name">深層極致舒壓</div></div>
+        <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>2,980</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-info"><div class="service-name">加購頭部／胸部／腹部</div><div class="service-sub">30 分鐘加購項目</div></div>
+        <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>980</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PREMIUM -->
+  <div class="tab-panel" id="panel-premium">
+    <div class="section-header">
+      <div class="section-title-en">Premium</div>
+      <div class="section-title-zh">極致美顏</div>
+      <div class="section-desc">極致配方，全面煥膚升級</div>
+      <div class="section-ornament"><div class="ornament-line"></div><div class="ornament-diamond"></div><div class="ornament-line rev"></div></div>
+    </div>
+    <div class="service-list">
+      <div class="service-card">
+        <div class="service-info"><div class="service-name">晶透無創水光</div></div>
+        <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>2,980</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-info"><div class="service-name">微晶極致超導</div></div>
+        <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>2,980</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-info"><div class="service-name">清新抗痘靚顏</div></div>
+        <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>2,980</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-info"><div class="service-name">溫艾亮膚舒顏</div></div>
+        <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>2,980</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-info"><div class="service-name">顧部輕盈舒緩</div></div>
+        <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>2,980</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-info"><div class="service-name">靚亮美背護理</div></div>
+        <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>2,980</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GCS -->
+  <div class="tab-panel" id="panel-gcs">
+    <div class="section-header">
+      <div class="section-title-en">GCS</div>
+      <div class="section-title-zh">GCS無創超導</div>
+      <div class="section-desc">無創技術，深層導入活性精華</div>
+      <div class="section-ornament"><div class="ornament-line"></div><div class="ornament-diamond"></div><div class="ornament-line rev"></div></div>
+    </div>
+    <div class="service-list">
+      <div class="service-card">
+        <div class="service-info"><div class="service-name">淨靚白</div></div>
+        <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>4,980</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-info"><div class="service-name">淨靚緊</div></div>
+        <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>4,980</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-info"><div class="service-name">淨靚減</div></div>
+        <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>4,980</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-info"><div class="service-name">淨靚童顏</div></div>
+        <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>4,980</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HONOR -->
+  <div class="tab-panel" id="panel-honor">
+    <div class="section-header">
+      <div class="section-title-en">Elite</div>
+      <div class="section-title-zh">尊榮頂級</div>
+      <div class="section-desc">頂級珍稀配方，專屬尊榮體驗</div>
+      <div class="section-ornament"><div class="ornament-line"></div><div class="ornament-diamond"></div><div class="ornament-line rev"></div></div>
+    </div>
+    <div class="service-list">
+      <div class="service-card">
+        <div class="service-info"><div class="service-name">精緻泌活煥顏</div></div>
+        <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>9,880</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-info"><div class="service-name">外泌胜肽蘊髮</div></div>
+        <div class="price-block"><span class="price-label">原價</span><span class="price-value"><span class="price-currency">$</span>8,800</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-line"></div>
+  VASI 琺息蘊美空間 &nbsp;·&nbsp; 價目表僅供參考，實際以門市公告為準
+</footer>
+
+<script>
+  const tabMap = {
+    all: 'panel-all',
+    tech: 'panel-tech',
+    fine: 'panel-fine',
+    light: 'panel-light',
+    heal: 'panel-heal',
+    premium: 'panel-premium',
+    gcs: 'panel-gcs',
+    honor: 'panel-honor'
+  };
+
+  document.getElementById('tabBar').addEventListener('click', e => {
+    const btn = e.target.closest('.tab-btn');
+    if (!btn) return;
+
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+
+    btn.classList.add('active');
+    const panelId = tabMap[btn.dataset.tab];
+    document.getElementById(panelId).classList.add('active');
+
+    btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  });
+</script>
+</body>
+</html>
